@@ -4,7 +4,9 @@ skip:'Skip to content',navFeatures:'Features',navScreens:'See the app',navStart:
 };
 const polish = Object.fromEntries([...document.querySelectorAll('[data-i18n]')].map(el => [el.dataset.i18n,el.textContent]));
 const descriptions = {pl:{home:'Stan środowiska, skróty do procesów i ostatnia aktywność.',profiles:'Zapisane profile, grupy i przypisania licencji w jednym miejscu.',attributes:'Wybierz dodatkowe atrybuty konta i zapisz zestaw do ponownego użycia.'},en:{home:'Environment status, process shortcuts and recent activity.',profiles:'Saved profiles, groups and license assignments in one place.',attributes:'Choose additional account attributes and save a reusable set.'}};
-let language='pl', gallery='home', releaseVersion='';
+// Static fallback keeps the current stable release visible and downloadable
+// when the anonymous GitHub API is temporarily unavailable or rate limited.
+let language='pl', gallery='home', releaseVersion='0.13.42';
 const dialog=document.getElementById('screen-dialog');
 function titleFor(screen){return screen==='home'?'Home':(language==='en'?english:polish)[screen];}
 function renderGallery(){const image=document.getElementById('gallery-image');image.src=`assets/${gallery}-${language}.png`;image.alt=`AdminForge — ${titleFor(gallery)}`;document.getElementById('gallery-open').dataset.screen=gallery;document.getElementById('gallery-title').textContent=titleFor(gallery);document.getElementById('gallery-caption').textContent=descriptions[language][gallery];document.querySelectorAll('[data-gallery]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.gallery===gallery)));}
